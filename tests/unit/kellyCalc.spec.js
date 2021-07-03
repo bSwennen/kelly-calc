@@ -32,7 +32,7 @@ test("Should compute expected win", () => {
   );
 });
 
-test("Should 0 bet unfavourable Kelly bet", () => {
+test("Should 0 bet unfavourable bet", () => {
   expect(Math.abs(unfavourableKellyCalc.getBet() - 0)).toBeLessThan(tolerance);
 });
 
