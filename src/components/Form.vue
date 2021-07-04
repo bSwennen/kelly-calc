@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" tile>
+  <v-card class="mx-auto" tile min-height="400">
     <v-form lazy-validation class="py-8 px-6">
       <v-text-field
         v-model="formData.bankroll"
@@ -12,21 +12,19 @@
       </v-text-field>
       <v-text-field
         v-model="formData.odds"
-        label="Odds"
+        label="Bookmaker odds"
         required
         type="number"
-        :rules="[v => v >= 1 || 'Odds must be at least 1']"
+        :rules="[v => v > 1 || 'Bookmaker odds must be more than 1']"
         v-on:input="onInput"
       >
       </v-text-field>
       <v-text-field
-        v-model="formData.winChance"
-        label="Win chance (%)"
+        v-model="formData.assumedOdds"
+        label="My odds"
         required
         type="number"
-        :rules="[
-          v => (v >= 0 && v <= 100) || 'win chance must be between 0% and 100%'
-        ]"
+        :rules="[v => v >= 1 || 'My odds must be at least 1']"
         v-on:input="onInput"
       >
       </v-text-field>
@@ -43,7 +41,7 @@ export default {
       formData: {
         bankroll: "",
         odds: "",
-        winChance: ""
+        assumedOdds: ""
       }
     };
   },

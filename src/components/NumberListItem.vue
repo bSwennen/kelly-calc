@@ -5,7 +5,8 @@
         >{{ this.label }}:
         {{
           (this.value * (isPercentage ? 100 : 1)).toLocaleString(undefined, {
-            minimumFractionDigits: 2
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
           })
         }}{{ isPercentage ? "%" : "" }}
       </v-list-item-title>

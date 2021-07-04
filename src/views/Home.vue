@@ -8,9 +8,11 @@
         <Results
           :bet="bet"
           :requiredWinChance="requiredWinChance"
+          :assumedWinChance="assumedWinChance"
           :edge="edge"
           :bankrollFraction="bankrollFraction"
           :expectedWin="expectedWin"
+          :growthRate="growthRate"
           v-if="computed"
         />
       </v-col>
@@ -31,25 +33,29 @@ export default {
       computed: false,
       bet: 0,
       requiredWinChance: 0,
+      assumedWinChance: 0,
       edge: 0,
       bankrollFraction: 0,
-      expectedWin: 0
+      expectedWin: 0,
+      growthRate: 0
     };
   },
   methods: {
     kellyCalc(formData) {
-      if (formData.bankroll && formData.odds && formData.winChance) {
+      if (formData.bankroll && formData.odds && formData.assumedOdds) {
         const kellyCalc = new KellyCalc(
           formData.bankroll,
           formData.odds,
-          formData.winChance / 100
+          formData.assumedOdds
         );
 
         this.bet = kellyCalc.getBet();
         this.requiredWinChance = kellyCalc.getRequiredWinChance();
+        this.assumedWinChance = kellyCalc.getAssumedWinChance();
         this.edge = kellyCalc.getEdge();
         this.bankrollFraction = kellyCalc.getBankrollFraction();
         this.expectedWin = kellyCalc.getExpectedWin();
+        this.growthRate = kellyCalc.getBankrollGrowthRate();
 
         this.computed = true;
       }
