@@ -1,35 +1,41 @@
 <template>
-  <v-card class="mx-auto" tile min-height="400">
-    <number-list-item :label="'Kelly Bet'" :value="this.bet"></number-list-item>
-    <number-list-item
-      :label="'Kelly Fraction'"
-      :value="this.bankrollFraction"
-      :isPercentage="true"
-    ></number-list-item>
-    <number-list-item
-      :label="'Required win chance'"
-      :value="this.requiredWinChance"
-      :isPercentage="true"
-    ></number-list-item>
-    <number-list-item
-      :label="'My win chance'"
-      :value="this.assumedWinChance"
-      :isPercentage="true"
-    ></number-list-item>
-    <number-list-item
-      :label="'Edge'"
-      :value="this.edge"
-      :isPercentage="true"
-    ></number-list-item>
-    <number-list-item
-      :label="'Expected win'"
-      :value="this.expectedWin"
-    ></number-list-item>
-    <number-list-item
-      :label="'Bankroll growth rate'"
-      :value="this.growthRate"
-      :isPercentage="true"
-    ></number-list-item>
+  <v-card class="mx-auto">
+    <v-card-title>Results</v-card-title>
+    <v-card-text>
+      <number-list-item
+        :label="'Kelly Bet'"
+        :value="this.bet"
+      ></number-list-item>
+      <number-list-item
+        :label="'Kelly Fraction'"
+        :value="this.bankrollFraction"
+        :isPercentage="true"
+      ></number-list-item>
+      <number-list-item
+        :label="'Required win chance'"
+        :value="this.requiredWinChance"
+        :isPercentage="true"
+      ></number-list-item>
+      <number-list-item
+        :label="'My win chance'"
+        :value="this.assumedWinChance"
+        :isPercentage="true"
+      ></number-list-item>
+      <number-list-item
+        :label="'Edge'"
+        :value="this.edge"
+        :isPercentage="true"
+      ></number-list-item>
+      <number-list-item
+        :label="'Average win'"
+        :value="this.expectedWin"
+      ></number-list-item>
+      <number-list-item
+        :label="'Average bankroll growth rate'"
+        :value="this.growthRate"
+        :isPercentage="true"
+      ></number-list-item>
+    </v-card-text>
   </v-card>
 </template>
 

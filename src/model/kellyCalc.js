@@ -61,7 +61,10 @@ class KellyCalc {
     this.bet = this.bankroll * this.bankrollFraction;
     this.expectedWin = this.bet * this.unitWin;
     this.bankrollGrowthRate =
-      Math.pow(1 + this.bankrollFraction, this.assumedWinChance) *
+      Math.pow(
+        1 + this.bankrollFraction * (this.odds - 1),
+        this.assumedWinChance
+      ) *
         Math.pow(1 - this.bankrollFraction, 1 - this.assumedWinChance) -
       1;
   }

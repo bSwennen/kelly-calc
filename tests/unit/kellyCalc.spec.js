@@ -41,7 +41,7 @@ test("Should compute expected win", () => {
 
 test("Should compute growth rate", () => {
   expect(
-    Math.abs(favourableKellyCalc.getBankRollGrowthRate() - 0.02034)
+    Math.abs(favourableKellyCalc.getBankrollGrowthRate() - 0.02034)
   ).toBeLessThan(tolerance);
 });
 
