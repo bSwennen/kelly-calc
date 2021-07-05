@@ -1,10 +1,11 @@
 <template>
-  <v-row dense>
+  <v-row>
     <v-col>
       <Form
         v-on:input="kellyCalc"
         v-on:delete="$emit('delete', $vnode.key)"
         v-on:copy="$emit('copy', $event)"
+        :initFormData="initFormData"
       />
     </v-col>
     <v-col>
@@ -29,6 +30,7 @@ import Form from "@/components/Form";
 
 export default {
   name: "KellyCalcRow",
+  props: { initFormData: Object },
   components: { Results, Form },
   data() {
     return {
@@ -62,6 +64,9 @@ export default {
         this.computed = true;
       }
     }
+  },
+  mounted() {
+    this.kellyCalc(this.initFormData);
   }
 };
 </script>

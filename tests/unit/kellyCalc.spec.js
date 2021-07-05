@@ -1,6 +1,6 @@
 const KellyCalc = require("../../src/model/kellyCalc.js");
 
-const tolerance = 1e-6;
+const numDigits = 6;
 
 const favourableKellyCalc = new KellyCalc(100, 2, 1 / 0.6);
 const unfavourableKellyCalc = new KellyCalc(100, 2, 10);
@@ -8,51 +8,47 @@ const zerosKellyCalc = new KellyCalc(0, 0, 0);
 const onesKellyCalc = new KellyCalc(1, 1, 1);
 
 test("Should compute bet", () => {
-  expect(Math.abs(favourableKellyCalc.getBet() - 20)).toBeLessThan(tolerance);
+  expect(favourableKellyCalc.getBet()).toBeCloseTo(20, numDigits);
 });
 
 test("Should compute required win chance", () => {
-  expect(
-    Math.abs(favourableKellyCalc.getRequiredWinChance() - 0.5)
-  ).toBeLessThan(tolerance);
-});
-
-test("Should compute assumed win chance", () => {
-  expect(
-    Math.abs(favourableKellyCalc.getAssumedWinChance() - 0.6)
-  ).toBeLessThan(tolerance);
-});
-
-test("Should compute edge", () => {
-  expect(Math.abs(favourableKellyCalc.getEdge() - 0.1)).toBeLessThan(tolerance);
-});
-
-test("Should compute bankroll fraction", () => {
-  expect(
-    Math.abs(favourableKellyCalc.getBankrollFraction() - 0.2)
-  ).toBeLessThan(tolerance);
-});
-
-test("Should compute expected win", () => {
-  expect(Math.abs(favourableKellyCalc.getExpectedWin() - 4)).toBeLessThan(
-    tolerance
+  expect(favourableKellyCalc.getRequiredWinChance()).toBeCloseTo(
+    0.5,
+    numDigits
   );
 });
 
+test("Should compute assumed win chance", () => {
+  expect(favourableKellyCalc.getAssumedWinChance()).toBeCloseTo(0.6, numDigits);
+});
+
+test("Should compute edge", () => {
+  expect(favourableKellyCalc.getEdge()).toBeCloseTo(0.1, numDigits);
+});
+
+test("Should compute bankroll fraction", () => {
+  expect(favourableKellyCalc.getBankrollFraction()).toBeCloseTo(0.2, numDigits);
+});
+
+test("Should compute expected win", () => {
+  expect(favourableKellyCalc.getExpectedWin()).toBeCloseTo(4, numDigits);
+});
+
 test("Should compute growth rate", () => {
-  expect(
-    Math.abs(favourableKellyCalc.getBankrollGrowthRate() - 0.02034)
-  ).toBeLessThan(tolerance);
+  expect(favourableKellyCalc.getBankrollGrowthRate()).toBeCloseTo(
+    0.02034,
+    numDigits
+  );
 });
 
 test("Should 0 bet unfavourable bet", () => {
-  expect(Math.abs(unfavourableKellyCalc.getBet() - 0)).toBeLessThan(tolerance);
+  expect(unfavourableKellyCalc.getBet()).toBeCloseTo(0, numDigits);
 });
 
 test("Should handle zeros", () => {
-  expect(Math.abs(zerosKellyCalc.getBet() - 0)).toBeLessThan(tolerance);
+  expect(zerosKellyCalc.getBet()).toBeCloseTo(0, numDigits);
 });
 
 test("Should handle ones", () => {
-  expect(Math.abs(onesKellyCalc.getBet() - 0)).toBeLessThan(tolerance);
+  expect(onesKellyCalc.getBet()).toBeCloseTo(0, numDigits);
 });

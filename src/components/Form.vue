@@ -43,6 +43,7 @@
 <script>
 export default {
   name: "Form",
+  props: { initFormData: Object },
 
   data() {
     return {
@@ -57,6 +58,15 @@ export default {
     onInput() {
       this.$emit("input", this.formData);
     }
+  },
+  created() {
+    if (this.initFormData.bankroll)
+      this.formData.bankroll = this.initFormData.bankroll;
+
+    if (this.initFormData.odds) this.formData.odds = this.initFormData.odds;
+
+    if (this.initFormData.assumedOdds)
+      this.formData.assumedOdds = this.initFormData.assumedOdds;
   }
 };
 </script>
