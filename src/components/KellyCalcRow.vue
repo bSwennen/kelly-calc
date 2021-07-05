@@ -1,26 +1,29 @@
 <template>
-  <v-row>
-    <v-col>
-      <Form
-        v-on:input="kellyCalc"
-        v-on:delete="$emit('delete', $vnode.key)"
-        v-on:copy="$emit('copy', $event)"
-        :initFormData="initFormData"
-      />
-    </v-col>
-    <v-col>
-      <Results
-        :bet="bet"
-        :requiredWinChance="requiredWinChance"
-        :assumedWinChance="assumedWinChance"
-        :edge="edge"
-        :bankrollFraction="bankrollFraction"
-        :expectedWin="expectedWin"
-        :growthRate="growthRate"
-        v-if="computed"
-      />
-    </v-col>
-  </v-row>
+  <v-container fluid>
+    <v-row>
+      <v-col>
+        <Form
+          v-on:input="kellyCalc"
+          v-on:delete="$emit('delete', $vnode.key)"
+          v-on:copy="$emit('copy', $event)"
+          :initFormData="initFormData"
+        />
+      </v-col>
+      <v-col>
+        <Results
+          :bet="bet"
+          :requiredWinChance="requiredWinChance"
+          :assumedWinChance="assumedWinChance"
+          :edge="edge"
+          :bankrollFraction="bankrollFraction"
+          :expectedWin="expectedWin"
+          :growthRate="growthRate"
+          v-if="computed"
+        />
+      </v-col>
+    </v-row>
+    <v-divider class="mt-3"></v-divider>
+  </v-container>
 </template>
 
 <script>

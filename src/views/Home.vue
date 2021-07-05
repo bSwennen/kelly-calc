@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="py-8 px-6">
+  <v-container fluid class="py-6 px-6">
     <KellyCalcRow
       v-for="row in this.rows"
       :key="row.key"
