@@ -1,38 +1,38 @@
 <template>
-  <v-card class="mx-auto">
+  <v-card>
     <v-card-title>Results</v-card-title>
     <v-card-text>
       <number-list-item
         :label="'Kelly Bet'"
-        :value="this.bet"
+        :value="results.bet"
       ></number-list-item>
       <number-list-item
         :label="'Kelly Fraction'"
-        :value="this.bankrollFraction"
+        :value="results.bankrollFraction"
         :isPercentage="true"
       ></number-list-item>
       <number-list-item
         :label="'Required win chance'"
-        :value="this.requiredWinChance"
+        :value="results.requiredWinChance"
         :isPercentage="true"
       ></number-list-item>
       <number-list-item
         :label="'My win chance'"
-        :value="this.assumedWinChance"
+        :value="results.assumedWinChance"
         :isPercentage="true"
       ></number-list-item>
       <number-list-item
         :label="'Edge'"
-        :value="this.edge"
+        :value="results.edge"
         :isPercentage="true"
       ></number-list-item>
       <number-list-item
         :label="'Average win'"
-        :value="this.expectedWin"
+        :value="results.expectedWin"
       ></number-list-item>
       <number-list-item
         :label="'Average bankroll growth rate'"
-        :value="this.growthRate"
+        :value="results.growthRate"
         :isPercentage="true"
       ></number-list-item>
     </v-card-text>
@@ -44,15 +44,7 @@ import NumberListItem from "@/components/NumberListItem";
 
 export default {
   name: "Results",
-  props: {
-    bet: Number,
-    requiredWinChance: Number,
-    assumedWinChance: Number,
-    edge: Number,
-    bankrollFraction: Number,
-    expectedWin: Number,
-    growthRate: Number
-  },
+  props: { results: Object },
   components: { NumberListItem }
 };
 </script>

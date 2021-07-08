@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto">
+  <v-card>
     <v-card-title>Input</v-card-title>
     <v-card-text>
       <v-form lazy-validation>
@@ -17,7 +17,7 @@
           label="Bookmaker odds"
           required
           type="number"
-          :rules="[v => v > 1 || 'Bookmaker odds must be more than 1']"
+          :rules="[v => v >= 1 || 'Bookmaker odds must be at least 1']"
           v-on:input="onInput"
         >
         </v-text-field>
