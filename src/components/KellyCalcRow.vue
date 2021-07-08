@@ -3,7 +3,7 @@
     <v-row>
       <v-col>
         <Form
-          @input="$emit('input', formData)"
+          @input="$emit('input', $event)"
           @delete="$emit('delete', $vnode.key)"
           @copy="$emit('copy', $event)"
           :initFormData="initFormData"
