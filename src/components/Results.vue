@@ -1,6 +1,11 @@
 <template>
   <v-card>
-    <v-card-title>Results</v-card-title>
+    <v-card-title
+      >Results
+      <v-icon v-if="results.isBestBet" class="mx-auto" color="green"
+        >mdi-star-face</v-icon
+      >
+    </v-card-title>
     <v-card-text>
       <number-list-item
         :label="'Kelly Bet'"

@@ -50,7 +50,8 @@ export default {
           edge: 0,
           bankrollFraction: 0,
           expectedWin: 0,
-          growthRate: 0
+          growthRate: 0,
+          isBestBet: false
         },
         computed: false
       };
@@ -83,8 +84,21 @@ export default {
           selectedRow.results.expectedWin = kellyCalc.getExpectedWin();
           selectedRow.results.growthRate = kellyCalc.getBankrollGrowthRate();
           selectedRow.computed = true;
+
+          selectedRow.results.isBestBet = this.isHighestGrowthRate(
+            selectedRow.results.growthRate
+          );
         }
       }
+    },
+    // TODO hightest rate could also be in one of the other rows
+    isHighestGrowthRate(growthRate) {
+      if (this.rows.length < 2) return false;
+
+      this.rows.forEach(value => {
+        if (value.results.growthRate > growthRate) return false;
+      });
+      return true;
     }
   },
   mounted() {
