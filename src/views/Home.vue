@@ -85,9 +85,7 @@ export default {
           selectedRow.results.growthRate = kellyCalc.getBankrollGrowthRate();
           selectedRow.computed = true;
 
-          selectedRow.results.isBestBet = this.isHighestGrowthRate(
-            selectedRow.results.growthRate
-          );
+          this.updateBestBet();
         }
       }
     },
@@ -99,6 +97,27 @@ export default {
         if (value.results.growthRate > growthRate) return false;
       });
       return true;
+    },
+    maxGrowthRateRow() {
+      let maxGrowthRate = 0;
+      let maxRow = this.rows[0];
+
+      this.rows.forEach(value => {
+        if (value.results.growthRate >= maxGrowthRate) {
+          maxGrowthRate = value.results.growthRate;
+          maxRow = value;
+        }
+      });
+      return maxRow;
+    },
+    updateBestBet() {
+      const maxRow = this.maxGrowthRateRow();
+
+      this.rows.forEach(value => {
+        if (value.key === maxRow.key && this.rows.length > 1)
+          value.results.isBestBet = true;
+        else value.results.isBestBet = false;
+      });
     }
   },
   mounted() {

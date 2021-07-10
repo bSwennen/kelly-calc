@@ -2,7 +2,7 @@
   <v-card>
     <v-card-title
       >Results
-      <v-icon v-if="results.isBestBet" class="mx-auto" color="green"
+      <v-icon v-if="results.isBestBet" class="ml-1" color="green"
         >mdi-star-face</v-icon
       >
     </v-card-title>
