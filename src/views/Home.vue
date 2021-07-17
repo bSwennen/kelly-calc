@@ -89,15 +89,6 @@ export default {
         }
       }
     },
-    // TODO hightest rate could also be in one of the other rows
-    isHighestGrowthRate(growthRate) {
-      if (this.rows.length < 2) return false;
-
-      this.rows.forEach(value => {
-        if (value.results.growthRate > growthRate) return false;
-      });
-      return true;
-    },
     maxGrowthRateRow() {
       let maxGrowthRate = 0;
       let maxRow = this.rows[0];
