@@ -11,7 +11,11 @@
 <script>
 export default {
   name: "NumberListItem",
-  props: { label: String, value: Number, isPercentage: Boolean },
+  props: {
+    label: String,
+    value: Number,
+    isPercentage: Boolean
+  },
   computed: {
     formattedValue() {
       return (this.value * (this.isPercentage ? 100 : 1)).toLocaleString(

@@ -1,4 +1,4 @@
-const KellyCalc = require("../../src/model/kellyCalc.js");
+import KellyCalc from "../../src/model/kellyCalc.js";
 
 const numDigits = 6;
 
@@ -51,4 +51,8 @@ test("Should handle zeros", () => {
 
 test("Should handle ones", () => {
   expect(onesKellyCalc.getBet()).toBeCloseTo(0, numDigits);
+});
+
+test("Should throw on invalid input", () => {
+  expect(() => new Simulator(-1, 3, 2, 1)).toThrowError();
 });
