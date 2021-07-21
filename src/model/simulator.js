@@ -1,4 +1,3 @@
-import KellyCalc from "../../src/model/kellyCalc.js";
 const DEFAULT_NUM_TIME_STEPS = 100;
 
 export default class Simulator {

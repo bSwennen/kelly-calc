@@ -4,8 +4,6 @@ const numDigits = 6;
 
 const favourableKellyCalc = new KellyCalc(100, 2, 1 / 0.6);
 const unfavourableKellyCalc = new KellyCalc(100, 2, 10);
-const zerosKellyCalc = new KellyCalc(0, 0, 0);
-const onesKellyCalc = new KellyCalc(1, 1, 1);
 
 test("Should compute bet", () => {
   expect(favourableKellyCalc.getBet()).toBeCloseTo(20, numDigits);
@@ -45,14 +43,14 @@ test("Should 0 bet unfavourable bet", () => {
   expect(unfavourableKellyCalc.getBet()).toBeCloseTo(0, numDigits);
 });
 
-test("Should handle zeros", () => {
-  expect(zerosKellyCalc.getBet()).toBeCloseTo(0, numDigits);
+test("Should throw on negative bankroll", () => {
+  expect(() => new KellyCalc(-1, 3, 2)).toThrowError();
 });
 
-test("Should handle ones", () => {
-  expect(onesKellyCalc.getBet()).toBeCloseTo(0, numDigits);
+test("Should throw on invalid odds", () => {
+  expect(() => new KellyCalc(1, 1, 2)).toThrowError();
 });
 
-test("Should throw on invalid input", () => {
-  expect(() => new Simulator(-1, 3, 2, 1)).toThrowError();
+test("Should throw on invalid assumed odds", () => {
+  expect(() => new KellyCalc(1, 2, 0.9)).toThrowError();
 });
