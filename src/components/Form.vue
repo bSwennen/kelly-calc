@@ -34,8 +34,20 @@
     </v-card-text>
     <v-divider></v-divider>
     <v-card-actions>
-      <v-btn text v-on:click="$emit('delete')">Delete</v-btn>
-      <v-btn text v-on:click="$emit('copy', formData)">Copy</v-btn>
+      <v-btn text @click="$emit('delete')" color="primary lighten"
+        >Delete</v-btn
+      >
+      <v-btn text @click="$emit('copy', formData)" color="primary lighten"
+        >Copy</v-btn
+      >
+      <v-btn
+        v-if="formData.bankroll && formData.odds && formData.assumedOdds"
+        text
+        @click="$emit('simulate')"
+        color="primary lighten"
+      >
+        Simulate
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>

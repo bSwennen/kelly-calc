@@ -26,8 +26,10 @@
         :label="'Average growth rate'"
         :value="results.growthRate"
         :isPercentage="true"
-      ></number-list-item>
+      >
+      </number-list-item>
     </v-card-text>
+    <v-divider></v-divider>
     <v-card-actions>
       <v-btn @click="show = !show" color="primary lighten" text>
         Details
@@ -42,8 +44,6 @@
 
     <v-expand-transition>
       <div v-show="show">
-        <v-divider></v-divider>
-
         <v-card-text>
           <number-list-item
             :label="'Kelly Fraction'"
