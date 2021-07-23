@@ -6,16 +6,22 @@
           @input="$emit('input', $event)"
           @delete="$emit('delete', $vnode.key)"
           @copy="$emit('copy', $event)"
+          @simulate="showSims = !showSims"
           :initFormData="initFormData"
+          :computed="computed"
         />
       </v-col>
       <v-col>
-        <Results :results="results" v-if="computed" />
+        <Results
+          :kellyCalc="kellyCalc"
+          :isBestBet="isBestBet"
+          v-if="computed"
+        />
       </v-col>
     </v-row>
     <v-row>
       <v-col>
-        <Chart />
+        <Chart v-if="showSims" :kellyCalc="kellyCalc" />
       </v-col>
     </v-row>
     <v-divider class="mt-3"></v-divider>
@@ -31,8 +37,14 @@ export default {
   name: "KellyCalcRow",
   props: {
     initFormData: Object,
-    results: Object,
+    kellyCalc: Object,
+    isBestBet: Boolean,
     computed: Boolean
+  },
+  data() {
+    return {
+      showSims: false
+    };
   },
   components: { Results, Form, Chart },
   mounted() {

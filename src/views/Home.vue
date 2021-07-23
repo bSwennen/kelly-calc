@@ -7,7 +7,8 @@
       @copy="onCopy"
       @input="kellyCalc($event, row)"
       :initFormData="row.formData"
-      :results="row.results"
+      :kellyCalc="row.kellyCalc"
+      :isBestBet="row.isBestBet"
       :computed="row.computed"
     />
     <v-btn fab dark color="primary lighten" v-on:click="onAdd" class="my-2">
@@ -36,6 +37,7 @@ export default {
       if (this.rows.length === 0) this.rows = [this.initRow(0, initFormData)];
       else {
         const newKey = this.rows[this.rows.length - 1].key + 1;
+
         this.rows.push(this.initRow(newKey, initFormData));
       }
     },
@@ -43,16 +45,8 @@ export default {
       return {
         key: key,
         formData: initFormData,
-        results: {
-          bet: 0,
-          requiredWinChance: 0,
-          assumedWinChance: 0,
-          edge: 0,
-          bankrollFraction: 0,
-          expectedWin: 0,
-          growthRate: 0,
-          isBestBet: false
-        },
+        kellyCalc: null,
+        isBestBet: false,
         computed: false
       };
     },
@@ -64,25 +58,15 @@ export default {
     },
     kellyCalc(formData, row) {
       if (formData.bankroll && formData.odds && formData.assumedOdds) {
-        const kellyCalc = new KellyCalc(
-          formData.bankroll,
-          formData.odds,
-          formData.assumedOdds
-        );
-
         const selectedRow = this.rows.filter(value => value.key === row.key)[0];
 
         if (selectedRow) {
-          selectedRow.results.bet = kellyCalc.getBet();
-          selectedRow.results.requiredWinChance =
-            kellyCalc.getRequiredWinChance();
-          selectedRow.results.assumedWinChance =
-            kellyCalc.getAssumedWinChance();
-          selectedRow.results.edge = kellyCalc.getEdge();
-          selectedRow.results.bankrollFraction =
-            kellyCalc.getBankrollFraction();
-          selectedRow.results.expectedWin = kellyCalc.getExpectedWin();
-          selectedRow.results.growthRate = kellyCalc.getBankrollGrowthRate();
+          const kellyCalc = new KellyCalc(
+            formData.bankroll,
+            formData.odds,
+            formData.assumedOdds
+          );
+          selectedRow.kellyCalc = kellyCalc;
           selectedRow.computed = true;
 
           this.updateBestBet();
@@ -94,8 +78,8 @@ export default {
       let maxRow = this.rows[0];
 
       this.rows.forEach(value => {
-        if (value.results.growthRate >= maxGrowthRate) {
-          maxGrowthRate = value.results.growthRate;
+        if (value.kellyCalc.getBankrollGrowthRate() >= maxGrowthRate) {
+          maxGrowthRate = value.kellyCalc.getBankrollGrowthRate();
           maxRow = value;
         }
       });
@@ -106,8 +90,8 @@ export default {
 
       this.rows.forEach(value => {
         if (value.key === maxRow.key && this.rows.length > 1)
-          value.results.isBestBet = true;
-        else value.results.isBestBet = false;
+          value.isBestBet = true;
+        else value.isBestBet = false;
       });
     }
   },

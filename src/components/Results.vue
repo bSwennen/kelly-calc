@@ -3,28 +3,26 @@
     <v-card-title
       >Results
       <v-spacer></v-spacer>
-      <v-icon v-if="results.isBestBet" class="ml-1" color="green"
-        >mdi-star-face</v-icon
-      >
+      <v-icon v-if="isBestBet" class="ml-1" color="green">mdi-star-face</v-icon>
     </v-card-title>
     <v-card-text>
       <number-list-item
         :label="'Kelly Bet'"
-        :value="results.bet"
+        :value="kellyCalc.getBet()"
       ></number-list-item>
       <number-list-item
         :label="'Required win chance'"
-        :value="results.requiredWinChance"
+        :value="kellyCalc.getRequiredWinChance()"
         :isPercentage="true"
       ></number-list-item>
       <number-list-item
         :label="'My win chance'"
-        :value="results.assumedWinChance"
+        :value="kellyCalc.getAssumedWinChance()"
         :isPercentage="true"
       ></number-list-item>
       <number-list-item
         :label="'Average growth rate'"
-        :value="results.growthRate"
+        :value="kellyCalc.getBankrollGrowthRate()"
         :isPercentage="true"
       >
       </number-list-item>
@@ -37,7 +35,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon @click="show = !show">
+      <v-btn icon @click="show = !show" color="primary lighten">
         <v-icon>{{ show ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
       </v-btn>
     </v-card-actions>
@@ -47,17 +45,17 @@
         <v-card-text>
           <number-list-item
             :label="'Kelly Fraction'"
-            :value="results.bankrollFraction"
+            :value="kellyCalc.getBankrollFraction()"
             :isPercentage="true"
           ></number-list-item>
           <number-list-item
             :label="'Edge'"
-            :value="results.edge"
+            :value="kellyCalc.getEdge()"
             :isPercentage="true"
           ></number-list-item>
           <number-list-item
             :label="'Average win'"
-            :value="results.expectedWin"
+            :value="kellyCalc.getExpectedWin()"
           ></number-list-item>
         </v-card-text>
       </div>
@@ -70,7 +68,7 @@ import NumberListItem from "@/components/NumberListItem";
 
 export default {
   name: "Results",
-  props: { results: Object },
+  props: { kellyCalc: Object, isBestBet: Boolean },
   data() {
     return {
       show: false

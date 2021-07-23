@@ -41,12 +41,12 @@
         >Copy</v-btn
       >
       <v-btn
-        v-if="formData.bankroll && formData.odds && formData.assumedOdds"
+        v-if="computed"
         text
         @click="$emit('simulate')"
         color="primary lighten"
       >
-        Simulate
+        Show simulations
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -55,7 +55,7 @@
 <script>
 export default {
   name: "Form",
-  props: { initFormData: Object },
+  props: { initFormData: Object, computed: Boolean },
 
   data() {
     return {
