@@ -73,6 +73,13 @@ test("Should use default time steps", () => {
   expect(simulation.length).toBe(101);
 });
 
+test("Should overwrite time steps", () => {
+  const testSimulator = new Simulator(mockKellyCalc, 10);
+  const simulation = testSimulator.simulate(23);
+
+  expect(simulation.length).toBe(24);
+});
+
 test("Should throw for negative time steps", () => {
   expect(() => new Simulator(mockKellyCalc, -1)).toThrowError();
 });

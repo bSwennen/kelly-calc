@@ -9,11 +9,11 @@ export default class Simulator {
     this.numTimeSteps = numTimeSteps;
   }
 
-  simulate() {
+  simulate(numTimeSteps = this.numTimeSteps) {
     const result = [];
     result.push(this.kellyCalc.getBankroll());
 
-    for (let i = 0; i < this.numTimeSteps; i++)
+    for (let i = 0; i < numTimeSteps; i++)
       result.push(this.simulateStep(result[i]));
 
     return result;

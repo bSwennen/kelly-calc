@@ -21,7 +21,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <Chart v-if="showSims" :kellyCalc="kellyCalc" />
+        <Simulation v-if="showSims" :kellyCalc="kellyCalc" />
       </v-col>
     </v-row>
     <v-divider class="mt-3"></v-divider>
@@ -31,7 +31,7 @@
 <script>
 import Results from "@/components/Results";
 import Form from "@/components/Form";
-import Chart from "@/components/Chart";
+import Simulation from "@/components/Simulation";
 
 export default {
   name: "KellyCalcRow",
@@ -46,7 +46,7 @@ export default {
       showSims: false
     };
   },
-  components: { Results, Form, Chart },
+  components: { Results, Form, Simulation },
   mounted() {
     if (this.initFormData) this.$emit("input", this.initFormData);
   }
