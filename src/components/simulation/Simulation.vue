@@ -1,36 +1,39 @@
 <template>
   <v-card>
-    <v-btn
-      icon
-      dark
-      color="primary lighten"
-      small
-      v-on:click="refresh"
-      class="mx-2 my-2"
-    >
-      <v-icon>mdi-refresh</v-icon>
-    </v-btn>
-    <Chart :simData="simData" />
+    <v-card-title>Simulations</v-card-title>
+    <v-card-text>
+      <SimulationForm
+        :initNumSims="initNumSims"
+        :initNumSteps="initNumSteps"
+        @refresh="refresh"
+        @input="onFormInput($event)"
+      />
+    </v-card-text>
+    <Chart :simData="simData" :isLogScale="isLogScale" />
   </v-card>
 </template>
 
 <script>
-import Chart from "@/components/Chart";
+import Chart from "@/components/simulation/Chart";
 import Simulator from "@/model/simulator";
+import SimulationForm from "@/components/simulation/SimulationForm";
 
 export default {
   name: "Simulation",
   props: {
     kellyCalc: Object
   },
-  components: { Chart },
+  components: { Chart, SimulationForm },
   data() {
     return {
       simulator: {},
       isLoading: true,
       simData: {},
-      numSteps: 10,
-      numSims: 10
+      initNumSteps: 100,
+      initNumSims: 10,
+      numSteps: null,
+      numSims: null,
+      isLogScale: true
     };
   },
   methods: {
@@ -71,19 +74,25 @@ export default {
       this.simulator = new Simulator(this.kellyCalc);
 
       return {
-        labels: Array.from(Array(numSteps + 1), (x, i) => Math.floor(i / 10)),
+        labels: Array.from(Array(numSteps + 1), (x, i) => i),
         datasets: this.generateDataSets(numSims, numSteps, this.simulator)
       };
     },
     refresh() {
-      this.simData = this.generateSimData(
-        this.numSims,
-        this.numSteps,
-        this.simulator
-      );
+      this.simData = this.generateSimData(this.numSims, this.numSteps);
+    },
+    onFormInput(formData) {
+      if (formData.numSims) this.numSims = formData.numSims;
+
+      if (formData.numSteps) this.numSteps = formData.numSteps;
+
+      this.isLogScale = formData.isLogScale;
     }
   },
   created() {
+    this.numSims = this.initNumSims;
+    this.numSteps = this.initNumSteps;
+
     this.refresh();
   }
 };

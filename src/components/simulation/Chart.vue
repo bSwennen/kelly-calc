@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@vue/composition-api";
+import { defineComponent, computed } from "@vue/composition-api";
 import { LineChart } from "vue-chart-3";
 import { Chart, registerables } from "chart.js";
 
@@ -19,21 +19,22 @@ Chart.register(...registerables);
 export default defineComponent({
   name: "Chart",
   props: {
-    simData: Object
+    simData: Object,
+    isLogScale: Boolean
   },
   components: { LineChart },
-  setup() {
-    const options = {
+  setup(props) {
+    const options = computed(() => ({
       scales: {
         y: {
-          type: "logarithmic"
+          type: props.isLogScale ? "logarithmic" : "linear"
         }
       },
       responsive: true,
       plugins: {
         legend: false
       }
-    };
+    }));
     return { options };
   }
 });

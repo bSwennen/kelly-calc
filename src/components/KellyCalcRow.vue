@@ -31,7 +31,7 @@
 <script>
 import Results from "@/components/Results";
 import Form from "@/components/Form";
-import Simulation from "@/components/Simulation";
+import Simulation from "@/components/simulation/Simulation";
 
 export default {
   name: "KellyCalcRow",
