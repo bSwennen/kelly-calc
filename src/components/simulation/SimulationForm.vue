@@ -7,7 +7,7 @@
           label="Number of simulations"
           required
           type="number"
-          :rules="[v => v >= 1 || 'Number of simulations must be at least 1']"
+          :rules="[(v) => v >= 1 || 'Number of simulations must be at least 1']"
           @input="onInput"
         >
         </v-text-field>
@@ -18,7 +18,7 @@
           label="Number of time steps"
           required
           type="number"
-          :rules="[v => v >= 1 || 'Number of time steps must be at least 1']"
+          :rules="[(v) => v >= 1 || 'Number of time steps must be at least 1']"
           @input="onInput"
         >
         </v-text-field>
@@ -54,8 +54,8 @@ export default {
       formData: {
         numSims: null,
         numSteps: null,
-        isLogScale: true
-      }
+        isLogScale: true,
+      },
     };
   },
   methods: {
@@ -67,12 +67,12 @@ export default {
         this.formData.numSteps = parseInt(this.formData.numSteps);
 
       this.$emit("input", this.formData);
-    }
+    },
   },
   created() {
     if (this.initNumSims) this.formData.numSims = this.initNumSims;
 
     if (this.initNumSteps) this.formData.numSteps = this.initNumSteps;
-  }
+  },
 };
 </script>

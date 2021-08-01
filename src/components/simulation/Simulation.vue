@@ -21,7 +21,7 @@ import SimulationForm from "@/components/simulation/SimulationForm";
 export default {
   name: "Simulation",
   props: {
-    kellyCalc: Object
+    kellyCalc: Object,
   },
   components: { Chart, SimulationForm },
   data() {
@@ -33,7 +33,7 @@ export default {
       initNumSims: 10,
       numSteps: null,
       numSims: null,
-      isLogScale: true
+      isLogScale: true,
     };
   },
   methods: {
@@ -47,7 +47,6 @@ export default {
       return result;
     },
     generateDataSets(numSims, numSteps, simulator) {
-      this.isLoading = true;
       const result = [];
 
       result.push({
@@ -55,7 +54,7 @@ export default {
         backgroundColor: "red",
         borderColor: "red",
         borderWidth: 1,
-        pointRadius: 0
+        pointRadius: 0,
       });
 
       for (let i = 0; i < numSims; i++)
@@ -64,9 +63,8 @@ export default {
           backgroundColor: "black",
           borderColor: "black",
           borderWidth: 0.7,
-          pointRadius: 0
+          pointRadius: 0,
         });
-      this.isLoading = false;
 
       return result;
     },
@@ -75,11 +73,13 @@ export default {
 
       return {
         labels: Array.from(Array(numSteps + 1), (x, i) => i),
-        datasets: this.generateDataSets(numSims, numSteps, this.simulator)
+        datasets: this.generateDataSets(numSims, numSteps, this.simulator),
       };
     },
     refresh() {
+      this.isLoading = true;
       this.simData = this.generateSimData(this.numSims, this.numSteps);
+      this.isLoading = false;
     },
     onFormInput(formData) {
       if (formData.numSims) this.numSims = formData.numSims;
@@ -87,13 +87,13 @@ export default {
       if (formData.numSteps) this.numSteps = formData.numSteps;
 
       this.isLogScale = formData.isLogScale;
-    }
+    },
   },
   created() {
     this.numSims = this.initNumSims;
     this.numSteps = this.initNumSteps;
 
     this.refresh();
-  }
+  },
 };
 </script>

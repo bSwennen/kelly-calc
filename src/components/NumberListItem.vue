@@ -10,7 +10,7 @@ export default {
   props: {
     label: String,
     value: Number,
-    isPercentage: Boolean
+    isPercentage: Boolean,
   },
   computed: {
     formattedValue() {
@@ -18,7 +18,7 @@ export default {
         undefined,
         { minimumFractionDigits: 2, maximumFractionDigits: 2 }
       );
-    }
-  }
+    },
+  },
 };
 </script>

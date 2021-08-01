@@ -71,9 +71,9 @@ export default {
   props: { kellyCalc: Object, isBestBet: Boolean },
   data() {
     return {
-      show: false
+      show: false,
     };
   },
-  components: { NumberListItem }
+  components: { NumberListItem },
 };
 </script>

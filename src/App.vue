@@ -27,6 +27,6 @@ export default {
 
   data: () => ({
     //
-  })
+  }),
 };
 </script>

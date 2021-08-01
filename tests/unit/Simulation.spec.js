@@ -19,7 +19,7 @@ beforeEach(() => {
       },
       getWinMultiplier: () => {
         return 5;
-      }
+      },
     };
   });
   mockKellyCalc = new KellyCalc(10, 3, 2);

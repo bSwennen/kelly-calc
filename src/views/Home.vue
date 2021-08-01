@@ -26,7 +26,7 @@ export default {
   components: { KellyCalcRow },
   data() {
     return {
-      rows: []
+      rows: [],
     };
   },
   methods: {
@@ -47,18 +47,20 @@ export default {
         formData: initFormData,
         kellyCalc: null,
         isBestBet: false,
-        computed: false
+        computed: false,
       };
     },
     onCopy(copyFormData) {
       this.addRow(copyFormData);
     },
     onDelete(row) {
-      this.rows = this.rows.filter(value => value.key !== row.key);
+      this.rows = this.rows.filter((value) => value.key !== row.key);
     },
     kellyCalc(formData, row) {
       if (formData.bankroll && formData.odds && formData.assumedOdds) {
-        const selectedRow = this.rows.filter(value => value.key === row.key)[0];
+        const selectedRow = this.rows.filter(
+          (value) => value.key === row.key
+        )[0];
 
         if (selectedRow) {
           const kellyCalc = new KellyCalc(
@@ -77,7 +79,7 @@ export default {
       let maxGrowthRate = 0;
       let maxRow = this.rows[0];
 
-      this.rows.forEach(value => {
+      this.rows.forEach((value) => {
         if (value.kellyCalc.getBankrollGrowthRate() >= maxGrowthRate) {
           maxGrowthRate = value.kellyCalc.getBankrollGrowthRate();
           maxRow = value;
@@ -88,15 +90,15 @@ export default {
     updateBestBet() {
       const maxRow = this.maxGrowthRateRow();
 
-      this.rows.forEach(value => {
+      this.rows.forEach((value) => {
         if (value.key === maxRow.key && this.rows.length > 1)
           value.isBestBet = true;
         else value.isBestBet = false;
       });
-    }
+    },
   },
   mounted() {
     this.addRow({});
-  }
+  },
 };
 </script>

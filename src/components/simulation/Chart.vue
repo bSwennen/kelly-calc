@@ -20,22 +20,22 @@ export default defineComponent({
   name: "Chart",
   props: {
     simData: Object,
-    isLogScale: Boolean
+    isLogScale: Boolean,
   },
   components: { LineChart },
   setup(props) {
     const options = computed(() => ({
       scales: {
         y: {
-          type: props.isLogScale ? "logarithmic" : "linear"
-        }
+          type: props.isLogScale ? "logarithmic" : "linear",
+        },
       },
       responsive: true,
       plugins: {
-        legend: false
-      }
+        legend: false,
+      },
     }));
     return { options };
-  }
+  },
 });
 </script>

@@ -39,16 +39,16 @@ export default {
     initFormData: Object,
     kellyCalc: Object,
     isBestBet: Boolean,
-    computed: Boolean
+    computed: Boolean,
   },
   data() {
     return {
-      showSims: false
+      showSims: false,
     };
   },
   components: { Results, Form, Simulation },
   mounted() {
     if (this.initFormData) this.$emit("input", this.initFormData);
-  }
+  },
 };
 </script>

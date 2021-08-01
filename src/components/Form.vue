@@ -8,7 +8,7 @@
           label="Bankroll"
           required
           type="number"
-          :rules="[v => v >= 0 || 'Bankroll must be positive']"
+          :rules="[(v) => v >= 0 || 'Bankroll must be positive']"
           v-on:input="onInput"
         >
         </v-text-field>
@@ -17,7 +17,7 @@
           label="Bookmaker odds"
           required
           type="number"
-          :rules="[v => v >= 1 || 'Bookmaker odds must be at least 1']"
+          :rules="[(v) => v >= 1 || 'Bookmaker odds must be at least 1']"
           v-on:input="onInput"
         >
         </v-text-field>
@@ -26,7 +26,7 @@
           label="My odds"
           required
           type="number"
-          :rules="[v => v >= 1 || 'My odds must be at least 1']"
+          :rules="[(v) => v >= 1 || 'My odds must be at least 1']"
           v-on:input="onInput"
         >
         </v-text-field>
@@ -62,14 +62,14 @@ export default {
       formData: {
         bankroll: "",
         odds: "",
-        assumedOdds: ""
-      }
+        assumedOdds: "",
+      },
     };
   },
   methods: {
     onInput() {
       this.$emit("input", this.formData);
-    }
+    },
   },
   created() {
     if (this.initFormData.bankroll)
@@ -79,6 +79,6 @@ export default {
 
     if (this.initFormData.assumedOdds)
       this.formData.assumedOdds = this.initFormData.assumedOdds;
-  }
+  },
 };
 </script>
