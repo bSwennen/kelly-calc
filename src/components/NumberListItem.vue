@@ -1,10 +1,10 @@
 <template>
   <v-list-item>
-    {{ label }}: {{ formattedValue }}{{ isPercentage ? "%" : "" }}
+    {{ label }}: {{ formattedValue }}{{ isPercentage? "%": "" }}
   </v-list-item>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "NumberListItem",
   props: {
@@ -13,8 +13,8 @@ export default {
     isPercentage: Boolean,
   },
   computed: {
-    formattedValue() {
-      return (this.value * (this.isPercentage ? 100 : 1)).toLocaleString(
+    formattedValue(): string {
+      return (this.value ?? 0 * (this.isPercentage ? 100 : 1)).toLocaleString(
         undefined,
         { minimumFractionDigits: 2, maximumFractionDigits: 2 }
       );

@@ -1,28 +1,23 @@
 <template>
   <v-card>
-    <LineChart
-      class="py-2 px-2"
-      :chartData="simData"
-      :options="options"
-      :height="100"
-    />
+    <Line class="py-2 px-2" :data="simData" :options="options" :height="100" />
   </v-card>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed } from "@vue/composition-api";
-import { LineChart } from "vue-chart-3";
+<script>
+import { defineComponent, computed } from "vue";
+import { Line } from "vue-chartjs";
 import { Chart, registerables } from "chart.js";
 
 Chart.register(...registerables);
 
 export default defineComponent({
   name: "Chart",
+  components: { Line },
   props: {
     simData: Object,
     isLogScale: Boolean,
   },
-  components: { LineChart },
   setup(props) {
     const options = computed(() => ({
       scales: {

@@ -1,34 +1,44 @@
-# kelly-calc
+# default
 
 ## Project setup
+
 ```
+# yarn
+yarn
+
+# npm
 npm install
+
+# pnpm
+pnpm install
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
-npm run serve
+# yarn
+yarn dev
+
+# npm
+npm run dev
+
+# pnpm
+pnpm dev
 ```
 
 ### Compiles and minifies for production
+
 ```
+# yarn
+yarn build
+
+# npm
 npm run build
-```
 
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Lints and fixes files
-```
-npm run lint
+# pnpm
+pnpm build
 ```
 
 ### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+See [Configuration Reference](https://vitejs.dev/config/).

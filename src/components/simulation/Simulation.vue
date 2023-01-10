@@ -2,51 +2,55 @@
   <v-card>
     <v-card-title>Simulations</v-card-title>
     <v-card-text>
-      <SimulationForm
-        :initNumSims="initNumSims"
-        :initNumSteps="initNumSteps"
-        @refresh="refresh"
-        @input="onFormInput($event)"
-      />
+      <SimulationForm :initNumSims="initNumSims" :initNumSteps="initNumSteps" @refresh="refresh"
+        @input="onFormInput($event)" />
     </v-card-text>
     <Chart :simData="simData" :isLogScale="isLogScale" />
   </v-card>
 </template>
 
-<script>
-import Chart from "@/components/simulation/Chart";
+<script lang="ts">
+import Chart from "./Chart.vue";
 import Simulator from "@/model/simulator";
-import SimulationForm from "@/components/simulation/SimulationForm";
+import SimulationForm from "./SimulationForm.vue";
+import KellyCalc from '@/model/kelly-calc';
+import { PropType } from 'vue';
+import { FormData } from "@/types/simulation/form-data";
 
 export default {
   name: "Simulation",
   props: {
-    kellyCalc: Object,
+    kellyCalc: Object as PropType<KellyCalc>,
   },
-  components: { Chart, SimulationForm },
+  components: {
+    Chart,
+    SimulationForm
+  },
   data() {
     return {
-      simulator: {},
+      simulator: {} as Simulator,
       isLoading: true,
       simData: {},
       initNumSteps: 100,
       initNumSims: 10,
-      numSteps: null,
-      numSims: null,
+      numSteps: 0,
+      numSims: 0,
       isLogScale: true,
     };
   },
   methods: {
-    generateAverageGrowthData(numSteps) {
-      const result = [];
-      result.push(this.kellyCalc.getBankroll());
+    generateAverageGrowthData(numSteps: number) {
+      if (this.kellyCalc) {
+        const result = [];
+        result.push(this.kellyCalc.getBankroll());
 
-      for (let i = 0; i < numSteps; i++)
-        result.push(result[i] * (1 + this.kellyCalc.getBankrollGrowthRate()));
+        for (let i = 0; i < numSteps; i++)
+          result.push(result[i] * (1 + this.kellyCalc.getBankrollGrowthRate()));
 
-      return result;
+        return result;
+      }
     },
-    generateDataSets(numSims, numSteps, simulator) {
+    generateDataSets(numSims: number, numSteps: number, simulator: Simulator) {
       const result = [];
 
       result.push({
@@ -68,24 +72,29 @@ export default {
 
       return result;
     },
-    generateSimData(numSims, numSteps) {
-      this.simulator = new Simulator(this.kellyCalc);
-
+    generateSimData(numSims: number, numSteps: number) {
+      if (this.kellyCalc) {
+        this.simulator = new Simulator(this.kellyCalc);
+      }
       return {
         labels: Array.from(Array(numSteps + 1), (x, i) => i),
         datasets: this.generateDataSets(numSims, numSteps, this.simulator),
       };
     },
     refresh() {
+      if (this.numSims && this.numSteps) {
+        this.simData = this.generateSimData(this.numSims, this.numSteps);
+      }
       this.isLoading = true;
-      this.simData = this.generateSimData(this.numSims, this.numSteps);
       this.isLoading = false;
     },
-    onFormInput(formData) {
-      if (formData.numSims) this.numSims = formData.numSims;
-
-      if (formData.numSteps) this.numSteps = formData.numSteps;
-
+    onFormInput(formData: FormData) {
+      if (formData.numSims) {
+        this.numSims = formData.numSims;
+      }
+      if (formData.numSteps) {
+        this.numSteps = formData.numSteps;
+      }
       this.isLogScale = formData.isLogScale;
     },
   },

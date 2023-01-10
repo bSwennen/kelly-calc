@@ -1,7 +1,11 @@
 const DEFAULT_NUM_TIME_STEPS = 100;
+import KellyCalc from "./kelly-calc";
 
 export default class Simulator {
-  constructor(kellyCalc, numTimeSteps = DEFAULT_NUM_TIME_STEPS) {
+  kellyCalc: KellyCalc
+  numTimeSteps: number;
+
+  constructor(kellyCalc: KellyCalc, numTimeSteps = DEFAULT_NUM_TIME_STEPS) {
     if (numTimeSteps < 0)
       throw new Error("Number of time steps should be positive");
 
@@ -10,19 +14,19 @@ export default class Simulator {
   }
 
   simulate(numTimeSteps = this.numTimeSteps) {
-    const result = [];
+    const result: number[] = [];
     result.push(this.kellyCalc.getBankroll());
 
-    for (let i = 0; i < numTimeSteps; i++)
+    for (let i = 0; i < numTimeSteps; i++) {
       result.push(this.simulateStep(result[i]));
-
+    }
     return result;
   }
 
-  simulateStep(bankroll) {
-    if (Math.random() < this.kellyCalc.getAssumedWinChance())
+  simulateStep(bankroll: number) {
+    if (Math.random() < this.kellyCalc.getAssumedWinChance()) {
       return bankroll * this.kellyCalc.getWinMultiplier();
-
+    }
     return bankroll * this.kellyCalc.getLossMultiplier();
   }
 }

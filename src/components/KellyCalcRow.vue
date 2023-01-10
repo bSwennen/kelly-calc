@@ -2,21 +2,11 @@
   <v-container fluid>
     <v-row>
       <v-col>
-        <Form
-          @input="$emit('input', $event)"
-          @delete="$emit('delete', $vnode.key)"
-          @copy="$emit('copy', $event)"
-          @simulate="showSims = !showSims"
-          :initFormData="initFormData"
-          :computed="computed"
-        />
+        <Form @input="$emit('input', $event)" @delete="$emit('delete', $.vnode.key)" @copy="$emit('copy', $event)"
+          @simulate="showSims = !showSims" :initFormData="initFormData" :computed="computed" :canDelete="canDelete" />
       </v-col>
       <v-col>
-        <Results
-          :kellyCalc="kellyCalc"
-          :isBestBet="isBestBet"
-          v-if="computed"
-        />
+        <Results :kellyCalc="kellyCalc" :isBestBet="isBestBet" v-if="computed" />
       </v-col>
     </v-row>
     <v-row>
@@ -28,27 +18,31 @@
   </v-container>
 </template>
 
-<script>
-import Results from "@/components/Results";
-import Form from "@/components/Form";
-import Simulation from "@/components/simulation/Simulation";
+<script lang="ts">
+import Results from "./Results.vue";
+import Form from "./Form.vue";
+import { FormData } from "@/types/form-data";
+import { defineComponent, PropType } from "vue";
+import Simulation from "./simulation/Simulation.vue";
+import KellyCalc from "@/model/kelly-calc";
 
-export default {
+export default defineComponent({
   name: "KellyCalcRow",
   props: {
-    initFormData: Object,
-    kellyCalc: Object,
+    initFormData: { type: Object as PropType<FormData> },
+    kellyCalc: { type: Object as PropType<KellyCalc> },
     isBestBet: Boolean,
     computed: Boolean,
+    canDelete: Boolean
   },
   data() {
     return {
-      showSims: false,
+      showSims: false as Boolean,
     };
   },
   components: { Results, Form, Simulation },
   mounted() {
     if (this.initFormData) this.$emit("input", this.initFormData);
   },
-};
+});
 </script>
