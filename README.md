@@ -1,4 +1,6 @@
-# default
+# Kelly Calculator
+
+Vue app to compute the optimal bet based on the [Kelly criterion](https://en.wikipedia.org/wiki/Kelly_criterion)
 
 ## Project setup
 
