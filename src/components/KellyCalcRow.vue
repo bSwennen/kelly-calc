@@ -35,12 +35,12 @@ export default defineComponent({
     computed: Boolean,
     canDelete: Boolean
   },
+  components: { Results, Form, Simulation },
   data() {
     return {
       showSims: false as Boolean,
     };
   },
-  components: { Results, Form, Simulation },
   mounted() {
     if (this.initFormData) this.$emit("input", this.initFormData);
   },

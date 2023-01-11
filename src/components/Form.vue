@@ -3,14 +3,17 @@
     <v-card-title>Input</v-card-title>
     <v-card-text>
       <v-form lazy-validation>
-        <v-text-field v-model="formData.bankroll" label="Bankroll" required type="number"
-          :rules="[(v: number) => v >= 0 || 'Bankroll must be positive']" v-on:input="onInput">
+        <v-text-field v-model="formData.bankroll" label="Bankroll" required
+          :rules="[(v: number) => v >= 0 || 'Bankroll must be positive']" @input="onInput" color="primary"
+          variant="underlined">
         </v-text-field>
-        <v-text-field v-model="formData.odds" label="Bookmaker odds" required type="number"
-          :rules="[(v: number) => v >= 1 || 'Bookmaker odds must be at least 1']" v-on:input="onInput">
+        <v-text-field v-model="formData.odds" label="Bookmaker odds" required
+          :rules="[(v: number) => v >= 1 || 'Bookmaker odds must be at least 1']" @input="onInput" color="primary"
+          variant="underlined">
         </v-text-field>
-        <v-text-field v-model="formData.assumedOdds" label="My odds" required type="number"
-          :rules="[(v: number) => v >= 1 || 'My odds must be at least 1']" v-on:input="onInput">
+        <v-text-field v-model="formData.assumedOdds" label="My odds" required
+          :rules="[(v: number) => v >= 1 || 'My odds must be at least 1']" @input="onInput" color="primary"
+          variant="underlined">
         </v-text-field>
       </v-form>
     </v-card-text>

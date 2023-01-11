@@ -1,16 +1,18 @@
 <template>
   <v-card>
-    <v-card-title>Results
-      <v-spacer></v-spacer>
-      <v-icon v-if="isBestBet" class="ml-1" color="green">mdi-star-face</v-icon>
-    </v-card-title>
+    <v-card-item title="Florida">
+      <template v-slot:title>
+        <v-icon size="25" v-if="isBestBet" icon="mdi-star-face" color="green"></v-icon>
+        Results
+      </template>
+    </v-card-item>
     <v-card-text>
-      <number-list-item :label="'Kelly Bet'" :value="kellyCalc.getBet()"></number-list-item>
-      <number-list-item :label="'Required win chance'" :value="kellyCalc.getRequiredWinChance()"
+      <number-list-item :label="'Kelly Bet'" :value="kellyCalc?.getBet()"></number-list-item>
+      <number-list-item :label="'Required win chance'" :value="kellyCalc?.getRequiredWinChance()"
         :isPercentage="true"></number-list-item>
-      <number-list-item :label="'My win chance'" :value="kellyCalc.getAssumedWinChance()"
+      <number-list-item :label="'My win chance'" :value="kellyCalc?.getAssumedWinChance()"
         :isPercentage="true"></number-list-item>
-      <number-list-item :label="'Average growth rate'" :value="kellyCalc.getBankrollGrowthRate()" :isPercentage="true">
+      <number-list-item :label="'Average growth rate'" :value="kellyCalc?.getBankrollGrowthRate()" :isPercentage="true">
       </number-list-item>
     </v-card-text>
     <v-divider></v-divider>
@@ -18,21 +20,18 @@
       <v-btn @click="show = !show" color="primary lighten" text>
         Details
       </v-btn>
-
       <v-spacer></v-spacer>
-
-      <v-btn icon @click="show = !show" color="primary lighten">
-        <v-icon>{{ show? "mdi-chevron-up": "mdi-chevron-down" }}</v-icon>
+      <v-btn :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="show = !show" color="primary lighten">
       </v-btn>
     </v-card-actions>
 
     <v-expand-transition>
       <div v-show="show">
         <v-card-text>
-          <number-list-item :label="'Kelly Fraction'" :value="kellyCalc.getBankrollFraction()"
+          <number-list-item :label="'Kelly Fraction'" :value="kellyCalc?.getBankrollFraction()"
             :isPercentage="true"></number-list-item>
-          <number-list-item :label="'Edge'" :value="kellyCalc.getEdge()" :isPercentage="true"></number-list-item>
-          <number-list-item :label="'Average win'" :value="kellyCalc.getExpectedWin()"></number-list-item>
+          <number-list-item :label="'Edge'" :value="kellyCalc?.getEdge()" :isPercentage="true"></number-list-item>
+          <number-list-item :label="'Average win'" :value="kellyCalc?.getExpectedWin()"></number-list-item>
         </v-card-text>
       </div>
     </v-expand-transition>
@@ -40,16 +39,23 @@
 </template>
 
 <script lang="ts">
+import KellyCalc from "@/model/kelly-calc";
+import { PropType } from "vue";
 import NumberListItem from "./NumberListItem.vue";
 
 export default {
   name: "Results",
-  props: { kellyCalc: Object, isBestBet: Boolean },
+  components: {
+    NumberListItem
+  },
+  props: {
+    kellyCalc: Object as PropType<KellyCalc>,
+    isBestBet: Boolean
+  },
   data() {
     return {
       show: false,
     };
   },
-  components: { NumberListItem },
 };
 </script>

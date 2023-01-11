@@ -3,8 +3,7 @@
     <KellyCalcRow v-for="row in rows" :key="row.key" @delete="onDelete(row)" @copy="onCopy"
       @input="kellyCalc($event, row)" :initFormData="row.formData" :kellyCalc="row.kellyCalc" :isBestBet="row.isBestBet"
       :computed="row.computed" :canDelete="canDelete()" />
-    <v-btn fab dark color="primary lighten" v-on:click="onAdd" class="my-2">
-      <v-icon dark> mdi-plus </v-icon>
+    <v-btn icon="mdi-plus" dark color="primary lighten" @click="onAdd">
     </v-btn>
   </v-container>
 </template>
