@@ -21,3 +21,10 @@ jobs:
 
     - name: Run tests
       run: npm run test
+
+    - name: Create Test Status Badge
+      id: badge
+      uses: jsdir/stability-badges@v2
+      with:
+        status: ${{ job.status }}
+        file: test-status.svg
