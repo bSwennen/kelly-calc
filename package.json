@@ -5,7 +5,8 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest run",
+    "testWatch": "vitest"
   },
   "dependencies": {
     "@mdi/font": "7.0.96",
