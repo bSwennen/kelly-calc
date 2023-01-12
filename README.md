@@ -2,8 +2,6 @@
 
 Vue app to compute the optimal bet based on the [Kelly criterion](https://en.wikipedia.org/wiki/Kelly_criterion)
 
-![Test Status](test-status.svg)
-
 ## Project setup
 
 ```
