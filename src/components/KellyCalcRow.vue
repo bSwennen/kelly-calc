@@ -11,7 +11,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <Simulation v-if="showSims" :kellyCalc="kellyCalc" />
+        <SimulationViewer v-if="showSims" :kellyCalc="kellyCalc" />
       </v-col>
     </v-row>
     <v-divider class="mt-3"></v-divider>
@@ -21,9 +21,9 @@
 <script lang="ts">
 import Results from "./Results.vue";
 import Form from "./Form.vue";
-import { FormData } from "@/types/form-data";
+import { FormData } from "../types";
 import { defineComponent, PropType } from "vue";
-import Simulation from "./simulation/Simulation.vue";
+import SimulationViewer from "./simulation/SimulationViewer.vue";
 import KellyCalc from "@/model/kelly-calc";
 
 export default defineComponent({
@@ -33,9 +33,9 @@ export default defineComponent({
     kellyCalc: { type: Object as PropType<KellyCalc> },
     isBestBet: Boolean,
     computed: Boolean,
-    canDelete: Boolean
+    canDelete: Boolean,
   },
-  components: { Results, Form, Simulation },
+  components: { Results, Form, SimulationViewer },
   data() {
     return {
       showSims: false as Boolean,

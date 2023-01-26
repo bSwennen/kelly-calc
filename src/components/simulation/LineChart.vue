@@ -1,8 +1,9 @@
 <template>
   <v-card>
     <Line
+      v-if="chartData"
       class="py-2 px-2"
-      :data="simData"
+      :data="chartData"
       :options="chartOptions"
       :height="100"
     />
@@ -17,8 +18,16 @@ import { computed } from "vue";
 Chart.register(...registerables);
 
 const props = defineProps({
-  simData: Object,
+  labels: Array,
+  dataSets: Array,
   isLogScale: Boolean,
+});
+
+const chartData = computed(() => {
+  return {
+    labels: props.labels,
+    datasets: props.dataSets,
+  };
 });
 
 const chartOptions = computed(() => {
