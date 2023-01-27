@@ -12,7 +12,7 @@ export interface FormData {
   assumedOdds?: number;
 }
 
-export interface FormData {
+export interface SimFormData {
   numSims?: number;
   numSteps?: number;
   isLogScale: boolean;
@@ -22,7 +22,7 @@ import KellyCalc from "@/model/kelly-calc";
 
 export interface KellyCalcData {
   key: number;
-  kellyCalc?: KellyCalc;
+  kellyCalc: KellyCalc;
   isBestBet: boolean;
   computed: boolean;
   formData: FormData;

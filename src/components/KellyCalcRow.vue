@@ -2,11 +2,22 @@
   <v-container fluid>
     <v-row>
       <v-col>
-        <Form @input="$emit('input', $event)" @delete="$emit('delete', $.vnode.key)" @copy="$emit('copy', $event)"
-          @simulate="showSims = !showSims" :initFormData="initFormData" :computed="computed" :canDelete="canDelete" />
+        <DataForm
+          @input="$emit('input', $event)"
+          @delete="$emit('delete', $.vnode.key)"
+          @copy="$emit('copy', $event)"
+          @simulate="onSimulate"
+          :initFormData="initFormData"
+          :computed="computed"
+          :canDelete="canDelete"
+        />
       </v-col>
       <v-col>
-        <Results :kellyCalc="kellyCalc" :isBestBet="isBestBet" v-if="computed" />
+        <ResultsDisplay
+          :kellyCalc="kellyCalc"
+          :isBestBet="isBestBet"
+          v-if="computed"
+        />
       </v-col>
     </v-row>
     <v-row>
@@ -18,31 +29,36 @@
   </v-container>
 </template>
 
-<script lang="ts">
-import Results from "./Results.vue";
-import Form from "./Form.vue";
+<script setup lang="ts">
+import ResultsDisplay from "./ResultsDisplay.vue";
+import DataForm from "./DataForm.vue";
 import { FormData } from "../types";
-import { defineComponent, PropType } from "vue";
+import { onMounted, ref } from "vue";
 import SimulationViewer from "./simulation/SimulationViewer.vue";
 import KellyCalc from "@/model/kelly-calc";
 
-export default defineComponent({
-  name: "KellyCalcRow",
-  props: {
-    initFormData: { type: Object as PropType<FormData> },
-    kellyCalc: { type: Object as PropType<KellyCalc> },
-    isBestBet: Boolean,
-    computed: Boolean,
-    canDelete: Boolean,
-  },
-  components: { Results, Form, SimulationViewer },
-  data() {
-    return {
-      showSims: false as Boolean,
-    };
-  },
-  mounted() {
-    if (this.initFormData) this.$emit("input", this.initFormData);
-  },
+const props = defineProps<{
+  initFormData: FormData;
+  kellyCalc: KellyCalc;
+  isBestBet: boolean;
+  computed: boolean;
+  canDelete: boolean;
+}>();
+
+const emits = defineEmits<{
+  (e: "input", formData: FormData): void;
+  (e: "copy", formData: FormData): void;
+}>();
+
+const showSims = ref(false);
+
+function onSimulate() {
+  showSims.value = !showSims.value;
+}
+
+onMounted(() => {
+  if (props.initFormData) {
+    emits("input", props.initFormData);
+  }
 });
 </script>

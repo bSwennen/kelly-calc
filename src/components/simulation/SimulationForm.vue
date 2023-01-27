@@ -47,40 +47,33 @@
   </v-form>
 </template>
 
-<script lang="ts">
-import { FormData } from "@/types/simulation/form-data";
+<script setup lang="ts">
+import { Ref, ref } from "vue";
+import { SimFormData } from "../../types";
 
-export default {
-  name: "SimulationForm",
-  props: {
-    initNumSims: Number,
-    initNumSteps: Number,
-  },
-  data() {
-    return {
-      formData: {
-        isLogScale: true,
-      } as FormData,
-    };
-  },
-  methods: {
-    onInput() {
-      if (this.formData.numSims) {
-        this.formData.numSims = Number(this.formData.numSims);
-      }
-      if (this.formData.numSteps) {
-        this.formData.numSteps = Number(this.formData.numSteps);
-      }
-      this.$emit("input", this.formData);
-    },
-  },
-  created() {
-    if (this.initNumSims) {
-      this.formData.numSims = this.initNumSims;
-    }
-    if (this.initNumSteps) {
-      this.formData.numSteps = this.initNumSteps;
-    }
-  },
-};
+const props = defineProps<{
+  initNumSims: number;
+  initNumSteps: number;
+}>();
+
+const emits = defineEmits<{
+  (e: "input", formData: SimFormData): void;
+  (e: "refresh"): void;
+}>();
+
+const formData: Ref<SimFormData> = ref({
+  numSims: props.initNumSims,
+  numSteps: props.initNumSims,
+  isLogScale: true,
+});
+
+function onInput() {
+  if (formData.value.numSims) {
+    formData.value.numSims = Number(formData.value.numSims);
+  }
+  if (formData.value.numSteps) {
+    formData.value.numSteps = Number(formData.value.numSteps);
+  }
+  emits("input", formData.value);
+}
 </script>
