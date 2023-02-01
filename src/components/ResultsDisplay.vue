@@ -14,21 +14,21 @@
     <v-card-text>
       <number-list-item
         :label="'Kelly Bet'"
-        :value="kellyCalc?.getBet()"
+        :value="kellyCalc?.getBet() ?? 0"
       ></number-list-item>
       <number-list-item
         :label="'Required win chance'"
-        :value="kellyCalc?.getRequiredWinChance()"
+        :value="kellyCalc?.getRequiredWinChance() ?? 0"
         :isPercentage="true"
       ></number-list-item>
       <number-list-item
         :label="'My win chance'"
-        :value="kellyCalc?.getAssumedWinChance()"
+        :value="kellyCalc?.getAssumedWinChance() ?? 0"
         :isPercentage="true"
       ></number-list-item>
       <number-list-item
         :label="'Average growth rate'"
-        :value="kellyCalc?.getBankrollGrowthRate()"
+        :value="kellyCalc?.getBankrollGrowthRate() ?? 0"
         :isPercentage="true"
       >
       </number-list-item>
@@ -50,17 +50,17 @@
         <v-card-text>
           <number-list-item
             :label="'Kelly Fraction'"
-            :value="kellyCalc?.getBankrollFraction()"
+            :value="kellyCalc?.getBankrollFraction() ?? 0"
             :isPercentage="true"
           ></number-list-item>
           <number-list-item
             :label="'Edge'"
-            :value="kellyCalc?.getEdge()"
+            :value="kellyCalc?.getEdge() ?? 0"
             :isPercentage="true"
           ></number-list-item>
           <number-list-item
             :label="'Average win'"
-            :value="kellyCalc?.getExpectedWin()"
+            :value="kellyCalc?.getExpectedWin() ?? 0"
           ></number-list-item>
         </v-card-text>
       </div>
@@ -74,7 +74,7 @@ import KellyCalc from "../model/kelly-calc";
 import NumberListItem from "./NumberListItem.vue";
 
 defineProps<{
-  kellyCalc: KellyCalc;
+  kellyCalc?: KellyCalc;
   isBestBet: boolean;
 }>();
 

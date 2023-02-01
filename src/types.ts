@@ -22,7 +22,7 @@ import KellyCalc from "@/model/kelly-calc";
 
 export interface KellyCalcData {
   key: number;
-  kellyCalc: KellyCalc;
+  kellyCalc?: KellyCalc;
   isBestBet: boolean;
   computed: boolean;
   formData: FormData;

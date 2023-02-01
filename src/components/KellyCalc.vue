@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import KellyCalc from "@/model/kelly-calc";
+import KellyCalc from "../model/kelly-calc";
 import { KellyCalcData, FormData } from "../types";
 import KellyCalcRow from "./KellyCalcRow.vue";
 import { onMounted, Ref, ref } from "vue";

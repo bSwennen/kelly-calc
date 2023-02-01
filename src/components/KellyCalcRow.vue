@@ -39,7 +39,7 @@ import KellyCalc from "@/model/kelly-calc";
 
 const props = defineProps<{
   initFormData: FormData;
-  kellyCalc: KellyCalc;
+  kellyCalc?: KellyCalc;
   isBestBet: boolean;
   computed: boolean;
   canDelete: boolean;
