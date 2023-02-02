@@ -22,7 +22,11 @@
     </v-row>
     <v-row>
       <v-col>
-        <SimulationViewer v-if="showSims" :kellyCalc="kellyCalc" />
+        <SimulationViewer
+          :theme="theme"
+          v-if="showSims"
+          :kellyCalc="kellyCalc"
+        />
       </v-col>
     </v-row>
     <v-divider class="mt-3"></v-divider>
@@ -43,6 +47,7 @@ const props = defineProps<{
   isBestBet: boolean;
   computed: boolean;
   canDelete: boolean;
+  theme: string;
 }>();
 
 const emits = defineEmits<{

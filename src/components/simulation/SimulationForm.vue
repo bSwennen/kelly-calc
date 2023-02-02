@@ -31,6 +31,7 @@
           label="Log scale"
           @change="onInput"
           color="primary"
+          :inline="true"
         ></v-switch>
       </v-col>
       <v-spacer></v-spacer>

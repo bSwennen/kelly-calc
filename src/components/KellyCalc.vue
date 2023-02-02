@@ -11,6 +11,7 @@
       :isBestBet="row.isBestBet"
       :computed="row.computed"
       :canDelete="canDelete()"
+      :theme="theme"
     />
     <v-btn icon="mdi-plus" dark color="primary lighten" @click="onAdd"> </v-btn>
   </v-container>
@@ -21,6 +22,10 @@ import KellyCalc from "../model/kelly-calc";
 import { KellyCalcData, FormData } from "../types";
 import KellyCalcRow from "./KellyCalcRow.vue";
 import { onMounted, Ref, ref } from "vue";
+
+defineProps<{
+  theme: string;
+}>();
 
 const rows: Ref<KellyCalcData[]> = ref([]);
 

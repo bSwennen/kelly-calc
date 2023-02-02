@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card variant="outlined">
     <v-card-title>Input</v-card-title>
     <v-card-text>
       <v-form lazy-validation>

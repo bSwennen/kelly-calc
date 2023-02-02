@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card variant="outlined">
     <v-card-title>Simulations</v-card-title>
     <v-card-text>
       <SimulationForm
@@ -23,12 +23,13 @@ import LineChart from "./LineChart.vue";
 import Simulator from "../../model/simulator";
 import SimulationForm from "./SimulationForm.vue";
 import KellyCalc from "../../model/kelly-calc";
-import { onMounted, PropType, ref, type Ref } from "vue";
-import { DataSet, FormData } from "../../types";
+import { onMounted, ref, type Ref, watch } from "vue";
+import { DataSet, SimFormData } from "../../types";
 
-const props = defineProps({
-  kellyCalc: Object as PropType<KellyCalc>,
-});
+const props = defineProps<{
+  kellyCalc: KellyCalc;
+  theme: string;
+}>();
 
 const initNumSteps = 100;
 const initNumSims = 10;
@@ -38,6 +39,29 @@ let dataSets: Ref<DataSet[]> = ref([]);
 let numSteps = ref(0);
 let numSims = ref(0);
 let isLogScale = ref(true);
+
+watch(
+  () => props.theme,
+  (newTheme) => {
+    reColorChart(newTheme);
+  }
+);
+
+function reColorChart(theme: string): void {
+  const newDataSets: DataSet[] = [];
+
+  dataSets.value.forEach((dataSet) => {
+    if (dataSet.borderColor !== "red") {
+      dataSet.borderColor = chartColor(theme);
+    }
+    newDataSets.push(dataSet);
+  });
+  dataSets.value = newDataSets;
+}
+
+function chartColor(theme: string): string {
+  return theme == "dark" ? "#93e8d3" : "black";
+}
 
 function generateAverageGrowthData(numSteps: number): number[] {
   if (props.kellyCalc) {
@@ -57,7 +81,6 @@ function generateDataSets(numSims: number, numSteps: number): DataSet[] {
 
   result.push({
     data: generateAverageGrowthData(numSteps),
-    backgroundColor: "red",
     borderColor: "red",
     borderWidth: 1,
     pointRadius: 0,
@@ -66,8 +89,7 @@ function generateDataSets(numSims: number, numSteps: number): DataSet[] {
   for (let i = 0; i < numSims; i++)
     result.push({
       data: simulator.simulate(numSteps),
-      backgroundColor: "black",
-      borderColor: "black",
+      borderColor: chartColor(props.theme),
       borderWidth: 0.7,
       pointRadius: 0,
     });
@@ -84,7 +106,7 @@ function refresh() {
   }
 }
 
-function onFormInput(formData: FormData) {
+function onFormInput(formData: SimFormData) {
   if (formData.numSims) {
     numSims.value = formData.numSims;
   }

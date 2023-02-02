@@ -1,6 +1,5 @@
 export type DataSet = {
   data: number[];
-  backgroundColor: string;
   borderColor: string;
   borderWidth: number;
   pointRadius: number;

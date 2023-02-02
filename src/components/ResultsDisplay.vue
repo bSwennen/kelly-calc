@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card variant="outlined">
     <v-card-item>
       <template v-slot:title>
         <v-icon

@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <div>
     <Line
       v-if="chartData"
       class="py-2 px-2"
@@ -7,7 +7,7 @@
       :options="chartOptions"
       :height="100"
     />
-  </v-card>
+  </div>
 </template>
 
 <script setup>
