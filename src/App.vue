@@ -27,7 +27,7 @@
 import { ref } from "vue";
 import KellyCalc from "./components/KellyCalc.vue";
 
-const theme = ref("light");
+const theme = ref("dark");
 
 function onClick() {
   theme.value = theme.value === "light" ? "dark" : "light";

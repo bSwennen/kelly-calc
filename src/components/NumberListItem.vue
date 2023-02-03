@@ -14,7 +14,7 @@ const props = defineProps<{
 }>();
 
 const formattedValue = computed(() => {
-  const value = props.value ?? 0 * (props.isPercentage ? 100 : 1);
+  const value = (props.value ?? 0) * (props.isPercentage ? 100 : 1);
 
   return value.toLocaleString(undefined, {
     minimumFractionDigits: 2,

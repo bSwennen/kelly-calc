@@ -36,7 +36,7 @@
 <script setup lang="ts">
 import ResultsDisplay from "./ResultsDisplay.vue";
 import DataForm from "./DataForm.vue";
-import { FormData } from "../types";
+import { FormData, KellyCalcData } from "../types";
 import { onMounted, ref } from "vue";
 import SimulationViewer from "./simulation/SimulationViewer.vue";
 import KellyCalc from "@/model/kelly-calc";
@@ -53,6 +53,7 @@ const props = defineProps<{
 const emits = defineEmits<{
   (e: "input", formData: FormData): void;
   (e: "copy", formData: FormData): void;
+  (e: "delete", kellyCalcData: KellyCalcData): void;
 }>();
 
 const showSims = ref(false);

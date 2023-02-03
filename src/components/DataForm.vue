@@ -73,6 +73,7 @@ const emits = defineEmits<{
   (e: "input", formData: FormData): void;
   (e: "copy", formData: FormData): void;
   (e: "simulate"): void;
+  (e: "delete"): void;
 }>();
 
 const formData: Ref<FormData> = ref({

@@ -20,20 +20,19 @@
 
 <script setup lang="ts">
 import LineChart from "./LineChart.vue";
-import Simulator from "../../model/simulator";
+import simulate from "../../model/simulator";
 import SimulationForm from "./SimulationForm.vue";
 import KellyCalc from "../../model/kelly-calc";
 import { onMounted, ref, type Ref, watch } from "vue";
 import { DataSet, SimFormData } from "../../types";
 
 const props = defineProps<{
-  kellyCalc: KellyCalc;
+  kellyCalc?: KellyCalc;
   theme: string;
 }>();
 
 const initNumSteps = 100;
 const initNumSims = 10;
-let simulator: Simulator;
 let labels: Ref<number[]> = ref([]);
 let dataSets: Ref<DataSet[]> = ref([]);
 let numSteps = ref(0);
@@ -85,15 +84,16 @@ function generateDataSets(numSims: number, numSteps: number): DataSet[] {
     borderWidth: 1,
     pointRadius: 0,
   });
-
-  for (let i = 0; i < numSims; i++)
-    result.push({
-      data: simulator.simulate(numSteps),
-      borderColor: chartColor(props.theme),
-      borderWidth: 0.7,
-      pointRadius: 0,
-    });
-
+  if (props.kellyCalc) {
+    for (let i = 0; i < numSims; i++) {
+      result.push({
+        data: simulate(props.kellyCalc, numSteps),
+        borderColor: chartColor(props.theme),
+        borderWidth: 0.7,
+        pointRadius: 0,
+      });
+    }
+  }
   return result;
 }
 
@@ -122,11 +122,6 @@ onMounted(() => {
   numSims.value = initNumSims;
   numSteps.value = initNumSteps;
 
-  if (props.kellyCalc) {
-    simulator = new Simulator(props.kellyCalc);
-  } else {
-    throw Error("KellyCalc should exist");
-  }
   refresh();
 });
 </script>
