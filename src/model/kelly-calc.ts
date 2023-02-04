@@ -3,16 +3,16 @@ export default class KellyCalc {
   assumedOdds: number;
   odds: number;
 
-  requiredWinChance: number | null;
-  assumedWinChance: number | null;
-  unitWin: number | null;
-  edge: number | null;
-  winMultiplier: number | null;
-  lossMultiplier: number | null;
-  bet: number | null;
-  bankrollGrowthRate: number | null;
-  expectedWin: number | null;
-  bankrollFraction: number | null;
+  requiredWinChance?: number;
+  assumedWinChance?: number;
+  unitWin?: number;
+  edge?: number;
+  winMultiplier?: number;
+  lossMultiplier?: number;
+  bet?: number;
+  bankrollGrowthRate?: number;
+  expectedWin?: number;
+  bankrollFraction?: number;
 
   constructor(bankroll: number, odds: number, assumedOdds: number) {
     if (bankroll < 0) {
@@ -27,17 +27,6 @@ export default class KellyCalc {
     this.bankroll = bankroll;
     this.odds = odds;
     this.assumedOdds = assumedOdds;
-
-    this.requiredWinChance = null;
-    this.assumedWinChance = null;
-    this.unitWin = null;
-    this.edge = null;
-    this.winMultiplier = null;
-    this.lossMultiplier = null;
-    this.bet = null;
-    this.bankrollGrowthRate = null;
-    this.expectedWin = null;
-    this.bankrollFraction = null;
   }
 
   getBankroll(): number {
@@ -105,7 +94,7 @@ export default class KellyCalc {
     if (!this.bankrollGrowthRate) {
       this.bankrollGrowthRate =
         Math.pow(this.getWinMultiplier(), this.getAssumedWinChance()) *
-        Math.pow(this.getLossMultiplier(), 1 - this.getAssumedWinChance()) -
+          Math.pow(this.getLossMultiplier(), 1 - this.getAssumedWinChance()) -
         1;
     }
     return this.bankrollGrowthRate;

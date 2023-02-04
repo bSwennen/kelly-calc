@@ -38,6 +38,7 @@ const chartOptions = computed(() => {
       },
     },
     responsive: true,
+    animation: false,
     plugins: {
       legend: false,
     },
