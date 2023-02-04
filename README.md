@@ -2,6 +2,8 @@
 
 Vue app to compute the optimal bet based on the [Kelly criterion](https://en.wikipedia.org/wiki/Kelly_criterion)
 
+Available on [kelly-calculator.netlify.app](https://kelly-calculator.netlify.app)
+
 ## Project setup
 
 ```
@@ -40,7 +42,3 @@ npm run build
 # pnpm
 pnpm build
 ```
-
-### Customize configuration
-
-See [Configuration Reference](https://vitejs.dev/config/).
